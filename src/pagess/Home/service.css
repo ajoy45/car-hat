@@ -1,0 +1,14 @@
+.single-service{
+    border: 1px solid goldenrod;
+    text-align: center;
+}
+.single-service img{
+    width: 320px;
+    
+}
+.single-service button{
+    font-size: 25px;
+    color: rgb(9, 58, 58);
+    background-color: darkolivegreen;
+    margin-bottom: 10px;
+}
