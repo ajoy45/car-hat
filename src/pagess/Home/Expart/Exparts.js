@@ -12,7 +12,7 @@ const Exparts = () => {
     ]
     return (
         <div>
-            <h1 className='text-primary text-center'>Exparts</h1>
+            <h1 id='expart' className='text-primary text-center'>Exparts</h1>
             <div className='row mb-5'>
                 {
                     exparts.map(expart => <Expart
