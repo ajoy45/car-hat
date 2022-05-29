@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Resister.css';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from "../firebase.init"
+import SocialLogin from '../pagess/Login/SocialLogin/SocialLogin';
 const Resister = () => {
     const [
         createUserWithEmailAndPassword,
@@ -38,6 +39,7 @@ const Resister = () => {
             <input type="submit" value="Resister" />
             </form>
             <p>already resister? <Link to="/login" className='text-danger text-decoration-none fs-4' onClick={navigateToLogin}>Please Login</Link></p>
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
