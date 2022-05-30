@@ -2,7 +2,7 @@
     width: 50%;
     margin: 0 auto;
 }
-.container-form input{
+.container-form input:not([type=checkbox]){
     display: block;
     width: 100%;
     padding: 10px;
