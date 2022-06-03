@@ -40,8 +40,10 @@ const Login = () => {
     }
     const resetPassword = async () => {
         const email = emailRef.current.value;
+       if(email){
         await sendPasswordResetEmail(email);
         toast('Sent email');
+       }
     }
     return (
         <div className='container w-50 mx-auto mt-3 mb-5'>
