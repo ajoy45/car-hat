@@ -7,6 +7,9 @@ import auth from '../../firebase.init';
 import SocialLogin from './SocialLogin/SocialLogin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Pagetitle from '../../Shared/Pagetitle/Pagetitle';
+import axios from 'axios';
+
 
 const Login = () => {
     const [
@@ -21,18 +24,23 @@ const Login = () => {
     const navigate = useNavigate()
     const emailRef = useRef("");
     const passwordRef = useRef('');
-    const handelSubmit = event => {
+    const handelSubmit = async event => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         // console.log(email,password)
-        signInWithEmailAndPassword(email, password)
+        await signInWithEmailAndPassword(email, password);
+        const { data } = await axios.post('https://young-hamlet-34340.herokuapp.com/login', { email });
+        console.log(data)
+        navigate(from, { replace: true })
+        localStorage.setItem('token', data.accessToken)
     }
+
     const navigateToResister = () => {
         navigate('/resister')
     }
     if (user) {
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
     }
     let elementError;
     if (error) {
@@ -40,13 +48,14 @@ const Login = () => {
     }
     const resetPassword = async () => {
         const email = emailRef.current.value;
-       if(email){
-        await sendPasswordResetEmail(email);
-        toast('Sent email');
-       }
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
     }
     return (
         <div className='container w-50 mx-auto mt-3 mb-5'>
+            <Pagetitle title='login'></Pagetitle>
             <h1 className='text-secondary text-center'>Login</h1>
             <Form onSubmit={handelSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">

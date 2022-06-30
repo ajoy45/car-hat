@@ -1,17 +1,20 @@
 import React from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import google from "../../../Images/Social/google logo.png";
 import facebook from "../../../Images/Social/facebook.png";
 import github from "../../../Images/Social/github.png";
 import { useSignInWithFacebook, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+
 const SocialLogin = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
     const [signInWithFacebook] = useSignInWithFacebook(auth);
     const [signInWithGithub,error1,user1] = useSignInWithGithub(auth);
 
-    const navigate=useNavigate()
     let errorElement;
     if (error||error1) {
         errorElement=<div>
@@ -20,7 +23,7 @@ const SocialLogin = () => {
           
       }
       if (user||user1) {
-        navigate('/home')
+        navigate(from, { replace: true });
       }
 
     return (
